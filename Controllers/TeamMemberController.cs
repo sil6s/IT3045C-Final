@@ -42,7 +42,7 @@ namespace IT3045C_Final.Controllers
             _context.TeamMembers.Add(teamMember);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTeamMembers", new { id = teamMember.Id }, teamMember);
+            return CreatedAtAction(nameof(GetTeamMembers), new { id = teamMember.Id }, teamMember);
         }
 
         // PUT: api/TeamMembers/5
