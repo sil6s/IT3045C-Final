@@ -1,7 +1,9 @@
+
 namespace IT3045C_Final.Models
 {
     public class Pet
     {
+        public int Id { get; set; }
         public string PetType { get; set; }
         public string Name { get; set; }
         public string Age { get; set; }
