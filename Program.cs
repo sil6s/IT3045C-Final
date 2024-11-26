@@ -1,4 +1,5 @@
 using IT3045C_Final.Data;
+using IT3045C_Final.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
     app.UseSwaggerUi3();
+}
+
+// Seed data on application startup
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    DataSeeder.Seed(context);
 }
 
 app.UseHttpsRedirection();
