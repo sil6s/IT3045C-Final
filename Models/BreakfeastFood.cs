@@ -8,5 +8,7 @@ namespace IT3045C_Final.Models
         public string Protein { get; set; }
         public string Carbs { get; set; }
         public string FruitsOrVeggies { get; set; }
+        public int TeamMemberId { get; set; }
+        public TeamMember TeamMember { get; set; }
     }
 }

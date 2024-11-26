@@ -7,11 +7,11 @@ namespace IT3045C_Final.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HobbiesController : ControllerBase
+    public class HobbyController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public HobbiesController(ApplicationDbContext context)
+        public HobbyController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -20,10 +20,18 @@ namespace IT3045C_Final.Controllers
         public async Task<ActionResult<IEnumerable<Hobby>>> GetHobbies(int? id)
         {
             if (id == null || id == 0)
+            {
                 return await _context.Hobbies.Take(5).ToListAsync();
+            }
 
-            var hobby = await _context.Hobbies.FindAsync(id);
-            return hobby == null ? NotFound() : new List<Hobby> { hobby };
+            var hobbies = await _context.Hobbies.Where(h => h.TeamMemberId == id).ToListAsync();
+
+            if (hobbies == null)
+            {
+                return NotFound();
+            }
+
+            return hobbies;
         }
 
         [HttpPost]
@@ -31,6 +39,7 @@ namespace IT3045C_Final.Controllers
         {
             _context.Hobbies.Add(hobby);
             await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetHobbies), new { id = hobby.Id }, hobby);
         }
 
@@ -38,15 +47,26 @@ namespace IT3045C_Final.Controllers
         public async Task<IActionResult> PutHobby(int id, Hobby hobby)
         {
             if (id != hobby.Id)
+            {
                 return BadRequest();
+            }
 
             _context.Entry(hobby).State = EntityState.Modified;
 
-            try { await _context.SaveChangesAsync(); }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Hobbies.Any(e => e.Id == id)) return NotFound();
-                throw;
+                if (!_context.Hobbies.Any(e => e.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
             return NoContent();
@@ -56,7 +76,10 @@ namespace IT3045C_Final.Controllers
         public async Task<IActionResult> DeleteHobby(int id)
         {
             var hobby = await _context.Hobbies.FindAsync(id);
-            if (hobby == null) return NotFound();
+            if (hobby == null)
+            {
+                return NotFound();
+            }
 
             _context.Hobbies.Remove(hobby);
             await _context.SaveChangesAsync();

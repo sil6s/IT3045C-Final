@@ -9,5 +9,7 @@ namespace IT3045C_Final.Models
         public string Age { get; set; }
         public string Color { get; set; }
         public string Gender { get; set; }
+        public int TeamMemberId { get; set; }
+        public TeamMember TeamMember { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace IT3045C_Final.Models
         public string Athletic { get; set; }
         public string Musical { get; set; }
         public string Academic { get; set; }
+        public int TeamMemberId { get; set; }
+        public TeamMember TeamMember { get; set; }
     }
 }
