@@ -14,7 +14,7 @@ namespace IT3045_Final.Seeds
                 Last Name = "Coniglio"
                 DOB = "10/22/2003"
                 College Program = "Software Development"
-                Program Level = "3rd Year"
+                Year in Program = "Junior"
             };
             context.TeamMember.Add(teamMember);
             context.SaveChanges();
