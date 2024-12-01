@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure the database context with SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add services for controllers, API documentation, and OpenAPI support
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument(config =>
@@ -17,6 +19,7 @@ builder.Services.AddOpenApiDocument(config =>
 
 var app = builder.Build();
 
+// Middleware for development environment: Enable Swagger UI and OpenAPI documentation
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
@@ -30,7 +33,12 @@ using (var scope = app.Services.CreateScope())
     DataSeeder.Seed(context);
 }
 
+// Configure HTTPS redirection and authorization
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
+// Map controllers to routes
 app.MapControllers();
+
+// Run the application
 app.Run();
