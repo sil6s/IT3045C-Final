@@ -18,13 +18,15 @@ namespace IT3045C_Final.Controllers
 
         // GET: api/TeamMembers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TeamMember>>> GetTeamMembers(int? id)
+        public async Task<ActionResult<IEnumerable<TeamMember>>> GetTeamMembers()
         {
-            if (id == null || id == 0)
-            {
-                return await _context.TeamMembers.Take(5).ToListAsync();
-            }
+            return await _context.TeamMembers.ToListAsync();
+        }
 
+        // GET: api/TeamMembers/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TeamMember>> GetTeamMemberById(int id)
+        {
             var teamMember = await _context.TeamMembers.FindAsync(id);
 
             if (teamMember == null)
@@ -32,7 +34,7 @@ namespace IT3045C_Final.Controllers
                 return NotFound();
             }
 
-            return new List<TeamMember> { teamMember };
+            return teamMember;
         }
 
         // POST: api/TeamMembers
@@ -42,10 +44,10 @@ namespace IT3045C_Final.Controllers
             _context.TeamMembers.Add(teamMember);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetTeamMembers), new { id = teamMember.Id }, teamMember);
+            return CreatedAtAction(nameof(GetTeamMemberById), new { id = teamMember.Id }, teamMember);
         }
 
-        // PUT: api/TeamMembers/5
+        // PUT: api/TeamMembers/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTeamMember(int id, TeamMember teamMember)
         {
@@ -75,7 +77,7 @@ namespace IT3045C_Final.Controllers
             return NoContent();
         }
 
-        // DELETE: api/TeamMembers/5
+        // DELETE: api/TeamMembers/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTeamMember(int id)
         {

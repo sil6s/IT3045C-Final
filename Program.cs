@@ -34,8 +34,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure HTTPS redirection and authorization
-app.UseHttpsRedirection();
-app.UseAuthorization();
+// app.UseHttpsRedirection();
+// app.UseAuthorization();
 
 // Map controllers to routes
 app.MapControllers();
