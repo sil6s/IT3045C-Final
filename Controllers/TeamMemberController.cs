@@ -17,10 +17,24 @@ namespace IT3045C_Final.Controllers
         }
 
         // GET: api/TeamMembers
+        // Retrieves the first 5 team members or a specific team member by id if specified
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TeamMember>>> GetTeamMembers()
+        public async Task<ActionResult<IEnumerable<TeamMember>>> GetTeamMembers(int? id)
         {
-            return await _context.TeamMembers.ToListAsync();
+            if (id == null || id == 0)
+            {
+                // Take the first 5 team members from the database
+                return await _context.TeamMembers.Take(5).ToListAsync();
+            }
+
+            var teamMember = await _context.TeamMembers.FindAsync(id);
+
+            if (teamMember == null)
+            {
+                return NotFound();
+            }
+
+            return new List<TeamMember> { teamMember }; // Return the specific team member
         }
 
         // GET: api/TeamMembers/{id}

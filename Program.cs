@@ -19,12 +19,9 @@ builder.Services.AddOpenApiDocument(config =>
 
 var app = builder.Build();
 
-// Middleware for development environment: Enable Swagger UI and OpenAPI documentation
-if (app.Environment.IsDevelopment())
-{
-    app.UseOpenApi();
-    app.UseSwaggerUi3();
-}
+// Enable Swagger UI and OpenAPI documentation for all environments
+app.UseOpenApi();
+app.UseSwaggerUi3();
 
 // Seed data on application startup
 using (var scope = app.Services.CreateScope())
