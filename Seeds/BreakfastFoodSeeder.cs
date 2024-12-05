@@ -1,3 +1,4 @@
+using System.Linq;
 using IT3045C_Final.Data;
 using IT3045C_Final.Models;
 
@@ -7,17 +8,41 @@ namespace IT3045C_Final.Seeds
     {
         public static void Seed(ApplicationDbContext context)
         {
-            var teamMember = context.TeamMembers.FirstOrDefault();
-            var breakfastFood = new BreakfastFood
+            if (context.BreakfastFood.Any()) return;
+
+            var teamMembers = context.TeamMembers.ToList();
+            var breakfastFoods = new[]
             {
-                BreakfastYN = "Yes",
-                Drink = "Coffee",
-                Protein = "Eggs",
-                Carbs = "Toast",
-                FruitsOrVeggies = "Banana",
-                TeamMemberId = teamMember.Id
+                new BreakfastFood
+                {
+                    BreakfastYN = "Yes",
+                    Drink = "Orange Juice",
+                    Protein = "Sausage Links",
+                    Carbs = "Pancakes",
+                    FruitsOrVeggies = null,
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Audrey Ryser")?.Id)
+                },
+                new BreakfastFood
+                {
+                    BreakfastYN = "Yes",
+                    Drink = "Coffee",
+                    Protein = "Bacon",
+                    Carbs = "Pancakes",
+                    FruitsOrVeggies = null,
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Jaxon Coniglio")?.Id)
+                },
+                new BreakfastFood
+                {
+                    BreakfastYN = "Yes",
+                    Drink = "Milk",
+                    Protein = "Eggs",
+                    Carbs = "Toast",
+                    FruitsOrVeggies = "Apple",
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Silas Curry")?.Id)
+                }
             };
-            context.BreakfastFood.Add(breakfastFood);
+
+            context.BreakfastFood.AddRange(breakfastFoods);
             context.SaveChanges();
         }
     }

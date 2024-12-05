@@ -16,6 +16,7 @@ namespace IT3045C_Final.Controllers
             _context = context;
         }
 
+        // GET: api/BreakfastFood
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BreakfastFood>>> GetBreakfastFoods(int? id)
         {
@@ -34,6 +35,7 @@ namespace IT3045C_Final.Controllers
             return breakfastFood;
         }
 
+        // POST: api/BreakfastFood
         [HttpPost]
         public async Task<ActionResult<BreakfastFood>> PostBreakfastFood(BreakfastFood breakfastFood)
         {
@@ -43,6 +45,7 @@ namespace IT3045C_Final.Controllers
             return CreatedAtAction(nameof(GetBreakfastFoods), new { id = breakfastFood.Id }, breakfastFood);
         }
 
+        // PUT: api/BreakfastFood/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBreakfastFood(int id, BreakfastFood breakfastFood)
         {
@@ -72,6 +75,7 @@ namespace IT3045C_Final.Controllers
             return NoContent();
         }
 
+        // DELETE: api/BreakfastFood/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBreakfastFood(int id)
         {

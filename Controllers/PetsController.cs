@@ -16,6 +16,7 @@ namespace IT3045C_Final.Controllers
             _context = context;
         }
 
+        // GET: api/Pet
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pet>>> GetPets(int? id)
         {
@@ -34,6 +35,7 @@ namespace IT3045C_Final.Controllers
             return pets;
         }
 
+        // POST: api/Pet
         [HttpPost]
         public async Task<ActionResult<Pet>> PostPet(Pet pet)
         {
@@ -43,6 +45,7 @@ namespace IT3045C_Final.Controllers
             return CreatedAtAction(nameof(GetPets), new { id = pet.Id }, pet);
         }
 
+        // PUT: api/Pet/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPet(int id, Pet pet)
         {
@@ -72,6 +75,7 @@ namespace IT3045C_Final.Controllers
             return NoContent();
         }
 
+        // DELETE: api/Pet/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePet(int id)
         {

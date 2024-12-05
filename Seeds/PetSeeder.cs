@@ -1,3 +1,4 @@
+using System.Linq;
 using IT3045C_Final.Data;
 using IT3045C_Final.Models;
 
@@ -7,17 +8,41 @@ namespace IT3045C_Final.Seeds
     {
         public static void Seed(ApplicationDbContext context)
         {
-            var teamMember = context.TeamMembers.FirstOrDefault();
-            var pet = new Pet
+            if (context.Pets.Any()) return;
+
+            var teamMembers = context.TeamMembers.ToList();
+            var pets = new[]
             {
-                PetType = "Dog",
-                Name = "Buddy",
-                Age = "2 years",
-                Color = "Brown",
-                Gender = "Male",
-                TeamMemberId = teamMember.Id
+                new Pet
+                {
+                    PetType = "None",
+                    Name = null,
+                    Age = null,
+                    Color = null,
+                    Gender = null,
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Audrey Ryser")?.Id)
+                },
+                new Pet
+                {
+                    PetType = "None",
+                    Name = null,
+                    Age = null,
+                    Color = null,
+                    Gender = null,
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Jaxon Coniglio")?.Id)
+                },
+                new Pet
+                {
+                    PetType = "Dog",
+                    Name = "Wilson",
+                    Age = "4 years",
+                    Color = "Black and Brown",
+                    Gender = "Male",
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Silas Curry")?.Id)
+                }
             };
-            context.Pets.Add(pet);
+
+            context.Pets.AddRange(pets);
             context.SaveChanges();
         }
     }

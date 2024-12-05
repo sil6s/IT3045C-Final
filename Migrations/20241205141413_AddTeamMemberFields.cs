@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IT3045C_Final.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class AddTeamMemberFields : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,11 +31,11 @@ namespace IT3045C_Final.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastYN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Drink = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Protein = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Carbs = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FruitsOrVeggies = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BreakfastYN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Drink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Protein = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Carbs = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FruitsOrVeggies = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TeamMemberId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -55,11 +55,11 @@ namespace IT3045C_Final.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HobbyYN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Artistic = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Athletic = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Musical = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Academic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HobbyYN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Artistic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Athletic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Musical = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Academic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TeamMemberId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -79,11 +79,11 @@ namespace IT3045C_Final.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PetType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PetType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TeamMemberId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using IT3045C_Final.Data;
 using IT3045C_Final.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IT3045C_Final.Controllers
 {
@@ -38,9 +38,16 @@ namespace IT3045C_Final.Controllers
         }
 
         // POST: api/TeamMembers
+        // Only basic fields are required here
         [HttpPost]
         public async Task<ActionResult<TeamMember>> PostTeamMember(TeamMember teamMember)
         {
+            // Ensure that non-required fields are not null
+            if (teamMember.FullName == null)
+            {
+                return BadRequest("Name is required");
+            }
+
             _context.TeamMembers.Add(teamMember);
             await _context.SaveChangesAsync();
 

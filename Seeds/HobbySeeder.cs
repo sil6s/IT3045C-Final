@@ -1,3 +1,4 @@
+using System.Linq;
 using IT3045C_Final.Data;
 using IT3045C_Final.Models;
 
@@ -7,20 +8,41 @@ namespace IT3045C_Final.Seeds
     {
         public static void Seed(ApplicationDbContext context)
         {
-            var teamMember = context.TeamMembers.FirstOrDefault();
-            if (teamMember == null || context.Hobbies.Any()) return;
+            if (context.Hobbies.Any()) return;
 
-            var hobby = new Hobby
+            var teamMembers = context.TeamMembers.ToList();
+            var hobbies = new[]
             {
-                HobbyYN = "Yes",
-                Artistic = "Painting",
-                Athletic = "Soccer",
-                Musical = "Guitar",
-                Academic = "Reading",
-                TeamMemberId = teamMember.Id
+                new Hobby
+                {
+                    HobbyYN = "Yes",
+                    Artistic = "Crafting",
+                    Athletic = "None",
+                    Musical = "Singing",
+                    Academic = "Reading",
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Audrey Ryser")?.Id)
+                },
+                new Hobby
+                {
+                    HobbyYN = "Yes",
+                    Artistic = "Drawing",
+                    Athletic = "Weight Lifting",
+                    Musical = "Trumpet",
+                    Academic = "Reading",
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Jaxon Coniglio")?.Id)
+                },
+                new Hobby
+                {
+                    HobbyYN = "Yes",
+                    Artistic = "Photography",
+                    Athletic = "Running",
+                    Musical = "Guitar",
+                    Academic = "Coding",
+                    TeamMemberId = (int)(teamMembers.FirstOrDefault(m => m.FullName == "Silas Curry")?.Id)
+                }
             };
 
-            context.Hobbies.Add(hobby);
+            context.Hobbies.AddRange(hobbies);
             context.SaveChanges();
         }
     }

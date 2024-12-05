@@ -16,6 +16,7 @@ namespace IT3045C_Final.Controllers
             _context = context;
         }
 
+        // GET: api/Hobby
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hobby>>> GetHobbies(int? id)
         {
@@ -34,6 +35,7 @@ namespace IT3045C_Final.Controllers
             return hobbies;
         }
 
+        // POST: api/Hobby
         [HttpPost]
         public async Task<ActionResult<Hobby>> PostHobby(Hobby hobby)
         {
@@ -43,6 +45,7 @@ namespace IT3045C_Final.Controllers
             return CreatedAtAction(nameof(GetHobbies), new { id = hobby.Id }, hobby);
         }
 
+        // PUT: api/Hobby/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHobby(int id, Hobby hobby)
         {
@@ -72,6 +75,7 @@ namespace IT3045C_Final.Controllers
             return NoContent();
         }
 
+        // DELETE: api/Hobby/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHobby(int id)
         {
